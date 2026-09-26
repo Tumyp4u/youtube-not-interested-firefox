@@ -1,19 +1,29 @@
+.ytni-thumbnail {
+  position: relative !important;
+}
+
 .ytni-choice {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  z-index: 20;
   display: inline-flex;
   align-items: center;
-  gap: 7px;
-  margin: 5px 0;
-  padding: 6px 10px;
+  justify-content: center;
+  margin: 0;
+  padding: 8px;
   border-radius: 8px;
-  background: #222;
+  background: #222e;
   color: #fff;
   font: 14px Arial, sans-serif;
   cursor: pointer;
 }
 
 .ytni-choice input {
-  width: 18px;
-  height: 18px;
+  width: 20px;
+  height: 20px;
+  margin: 0;
+  cursor: pointer;
   accent-color: #f44336;
 }
 

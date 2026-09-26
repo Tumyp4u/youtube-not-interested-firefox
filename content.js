@@ -37,7 +37,7 @@
   }
 
   function refreshPanel() {
-    panel.hidden = !home();
+    panel.hidden = !home() || (!busy && selected.size === 0);
     const text = busy
       ? message
       : `Выбрано: ${selected.size}${message ? ` · ${message}` : ""}`;
@@ -52,16 +52,21 @@
       cancelled = true;
       selected.clear();
 
-      for (const control of controls.values()) control.label.remove();
+      for (const control of controls.values()) {
+        control.label.remove();
+        control.host.classList.remove("ytni-thumbnail");
+      }
       controls.clear();
       refreshPanel();
       return;
     }
 
     for (const [card, control] of controls) {
-      if (!card.isConnected || videoId(card) !== control.id) {
+      if (!card.isConnected || !control.label.isConnected ||
+          videoId(card) !== control.id) {
         selected.delete(card);
         control.label.remove();
+        control.host.classList.remove("ytni-thumbnail");
         controls.delete(card);
       }
     }
@@ -77,14 +82,26 @@
       const id = videoId(card);
       if (!id) continue;
 
+      const thumbnail = card.querySelector(
+        'ytd-thumbnail a#thumbnail, a.yt-lockup-view-model__content-image'
+      );
+      const host = thumbnail?.parentElement;
+      if (!host || !visible(thumbnail)) continue;
+
+      if (getComputedStyle(host).position === "static") {
+        host.classList.add("ytni-thumbnail");
+      }
+
       const label = document.createElement("label");
       label.className = "ytni-choice";
+      label.title = "Выбрать видео";
 
       const checkbox = document.createElement("input");
       checkbox.type = "checkbox";
       checkbox.disabled = busy;
+      checkbox.setAttribute("aria-label", "Выбрать видео");
 
-      label.append(checkbox, document.createTextNode("Выбрать"));
+      label.append(checkbox);
       label.addEventListener("click", event => event.stopPropagation());
 
       checkbox.addEventListener("change", () => {
@@ -94,8 +111,8 @@
         refreshPanel();
       });
 
-      card.prepend(label);
-      controls.set(card, { id, label, checkbox });
+      host.append(label);
+      controls.set(card, { id, label, checkbox, host });
     }
 
     for (const [card, control] of controls) {
