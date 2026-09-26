@@ -1,0 +1,61 @@
+.ytni-choice {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  margin: 5px 0;
+  padding: 6px 10px;
+  border-radius: 8px;
+  background: #222;
+  color: #fff;
+  font: 14px Arial, sans-serif;
+  cursor: pointer;
+}
+
+.ytni-choice input {
+  width: 18px;
+  height: 18px;
+  accent-color: #f44336;
+}
+
+#ytni-panel {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2200;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  max-width: 90vw;
+  padding: 12px 16px;
+  border: 1px solid #666;
+  border-radius: 14px;
+  background: #202020;
+  color: #fff;
+  box-shadow: 0 4px 24px #0008;
+  font: 14px Arial, sans-serif;
+}
+
+#ytni-panel[hidden] {
+  display: none !important;
+}
+
+#ytni-panel button {
+  padding: 9px 14px;
+  border: 0;
+  border-radius: 8px;
+  background: #444;
+  color: #fff;
+  font: inherit;
+  cursor: pointer;
+}
+
+#ytni-panel .ytni-submit {
+  background: #c62828;
+}
+
+#ytni-panel button:disabled {
+  opacity: 0.5;
+  cursor: default;
+}

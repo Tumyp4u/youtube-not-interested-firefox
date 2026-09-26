@@ -1,0 +1,19 @@
+{
+  "manifest_version": 3,
+  "name": "YouTube — Не интересует",
+  "version": "0.1.0",
+  "description": "Выбор нескольких видео на главной странице YouTube.",
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "youtube-not-interested@tumyp4u.github.io"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://www.youtube.com/*"],
+      "js": ["content.js"],
+      "css": ["style.css"],
+      "run_at": "document_idle"
+    }
+  ]
+}
