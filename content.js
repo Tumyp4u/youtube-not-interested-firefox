@@ -83,7 +83,8 @@
       if (!id) continue;
 
       const thumbnail = card.querySelector(
-        'ytd-thumbnail a#thumbnail, a.yt-lockup-view-model__content-image'
+        'ytd-thumbnail a#thumbnail, a.yt-lockup-view-model__content-image, ' +
+        'a.ytLockupViewModelContentImage'
       );
       const host = thumbnail?.parentElement;
       if (!host || !visible(thumbnail)) continue;
